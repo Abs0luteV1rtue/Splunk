@@ -883,6 +883,8 @@
           <Protocol condition="is">udp</Protocol>
           <DestinationPort condition="is">3389</DestinationPort>
         </Rule>
+        <SourceIp condition="is">224.0.0.251</SourceIp>
+        <SourceIp condition="is">ff02:0:0:0:0:0:0:fb</SourceIp>
         <Image condition="is">C:\Program Files (x86)\Sophos\Sophos Anti-Virus\Web Intelligence\swi_service.exe</Image>
         <Image condition="is">C:\Program Files (x86)\Sophos\AutoUpdate\ALsvc.exe</Image>
         <Image condition="is">C:\Program Files (x86)\Sophos\Remote Management System\RouterNT.exe</Image>
@@ -949,22 +951,27 @@
         <Rule groupRelation="and">
           <OriginalFileName name="technique_id=T1055,technique_name=Process Injection" condition="is">mscoreei.dll</OriginalFileName>
           <Image condition="excludes">C:\Windows\Microsoft.NET\</Image>
+          <Image condition="excludes">C:\Windows\SysWOW64\WindowsPowerShell\v1.0\powershell.exe</Image>
         </Rule>
         <Rule groupRelation="and">
           <OriginalFileName name="technique_id=T1055,technique_name=Process Injection" condition="is">mscoree.dll</OriginalFileName>
           <Image condition="excludes">C:\Windows\Microsoft.NET\</Image>
+          <Image condition="excludes">C:\Windows\SysWOW64\WindowsPowerShell\v1.0\powershell.exe</Image>
         </Rule>
         <Rule groupRelation="and">
           <OriginalFileName name="technique_id=T1055,technique_name=Process Injection" condition="is">mscoreeis.dll</OriginalFileName>
           <Image condition="excludes">C:\Windows\Microsoft.NET\</Image>
+          <Image condition="excludes">C:\Windows\SysWOW64\WindowsPowerShell\v1.0\powershell.exe</Image>
         </Rule>
         <Rule groupRelation="and">
           <OriginalFileName name="technique_id=T1055,technique_name=Process Injection" condition="is">mscorlib.dll</OriginalFileName>
           <Image condition="excludes">C:\Windows\Microsoft.NET\</Image>
+          <Image condition="excludes">C:\Windows\SysWOW64\WindowsPowerShell\v1.0\powershell.exe</Image>
         </Rule>
         <Rule groupRelation="and">
           <OriginalFileName name="technique_id=T1055,technique_name=Process Injection" condition="is">mscorlib.ni.dll</OriginalFileName>
           <Image condition="excludes">C:\Windows\Microsoft.NET\</Image>
+          <Image condition="excludes">C:\Windows\SysWOW64\WindowsPowerShell\v1.0\powershell.exe</Image>
         </Rule>
         <ImageLoaded name="technique_id=T1047,technique_name=Windows Scheduled Tasks" condition="end with">mstask.dll</ImageLoaded>
         <ImageLoaded name="technique_id=T1059,technique_name=Command and Scripting Interpreter" condition="end with">wshom.ocx</ImageLoaded>
@@ -1025,13 +1032,6 @@
           <Image name="technique_id=T1047,technique_name=Windows Management Instrumentation" condition="contains all">C:\Program Files;\Microsoft Office\root\Office</Image>
           <ImageLoaded condition="is">C:\Windows\SysWOW64\wbem\wbemdisp.dll</ImageLoaded>
         </Rule>
-        <ImageLoaded name="technique_id=T1059.001,technique_name=PowerShell" condition="end with">system.management.automation.ni.dll</ImageLoaded>
-        <ImageLoaded name="technique_id=T1059.001,technique_name=PowerShell" condition="end with">system.management.automation.dll</ImageLoaded>
-        <ImageLoaded name="technique_id=T1059.001,technique_name=PowerShell" condition="end with">Microsoft.PowerShell.Commands.Diagnostics.dll</ImageLoaded>
-        <ImageLoaded name="technique_id=T1059.001,technique_name=PowerShell" condition="end with">Microsoft.PowerShell.Commands.Management.dll</ImageLoaded>
-        <ImageLoaded name="technique_id=T1059.001,technique_name=PowerShell" condition="end with">Microsoft.PowerShell.Commands.Utility.dll</ImageLoaded>
-        <ImageLoaded name="technique_id=T1059.001,technique_name=PowerShell" condition="end with">Microsoft.PowerShell.ConsoleHost.dll</ImageLoaded>
-        <ImageLoaded name="technique_id=T1059.001,technique_name=PowerShell" condition="end with">Microsoft.PowerShell.Security.dll</ImageLoaded>
         <ImageLoaded name="technique_id=T1210,technique_name=Exploitation of Remote Services" condition="begin with">C:\Windows\System32\spool\drivers\</ImageLoaded>
         <OriginalFileName name="technique_id=T1112,technique_name=Modify Registry" condition="is">regsvc.dll</OriginalFileName>
         <Rule groupRelation="and">
@@ -1077,7 +1077,7 @@
           <OriginalFileName condition="is">scrobj.dll</OriginalFileName>
         </Rule>
         <Rule groupRelation="and">
-          <Image condition="is">powershell.exe</Image>
+          <Image condition="end with">powershell.exe</Image>
           <OriginalFileName condition="excludes all">mscoree.dll;mscoreei.dll;mscoreeis.dll;clr.dll;clrjit.dll</OriginalFileName>
         </Rule>
         <Rule groupRelation="and">
@@ -1501,9 +1501,12 @@
         <Image condition="is">C:\Windows\System32\smss.exe</Image>
         <Image condition="is">C:\Windows\system32\CompatTelRunner.exe</Image>
         <Image condition="is">C:\Windows\system32\wbem\WMIADAP.EXE</Image>
+        <Image condition="end with">SophosOsquery.exe</Image>
+        <Image condition="end with">wuaucltcore.exe</Image>
         <TargetFilename condition="begin with">C:\Windows\System32\DriverStore\Temp\</TargetFilename>
         <TargetFilename condition="begin with">C:\Windows\System32\wbem\Performance\</TargetFilename>
         <TargetFilename condition="end with">WRITABLE.TST</TargetFilename>
+        <TargetFilename condition="end with">SDXHelper.exe</TargetFilename>
         <TargetFilename condition="contains">\AppData\Roaming\Microsoft\Windows\Recent\</TargetFilename>
         <TargetFilename condition="begin with">C:\$WINDOWS.~BT\Sources\SafeOS\SafeOS.Mount\</TargetFilename>
         <Image condition="begin with">C:\WINDOWS\winsxs\amd64_microsoft-windows</Image>
@@ -1618,7 +1621,6 @@
         <TargetObject name="technique_id=T1137.006,technique_name=Office Add-ins" condition="contains all">\Microsoft\Office;\Outlook\Addins</TargetObject>
         <TargetObject name="technique_id=T1137.006,technique_name=Office Add-ins" condition="contains">\Software\Microsoft\VSTO\Security\Inclusion</TargetObject>
         <TargetObject name="technique_id=T1137.006,technique_name=Office Add-ins" condition="contains">\Software\Microsoft\VSTO\SolutionMetadata</TargetObject>
-        <TargetObject name="technique_name=Outlook Server 95/98 Identity Keys" condition="contains">Identities</TargetObject>
         <TargetObject condition="contains all">SOFTWARE\Microsoft\Office\;\Outlook\Profiles\;\9375CFF0413111d3B88A00104B2A6676\;\Account Name</TargetObject>
         <TargetObject condition="contains all">SOFTWARE\Microsoft\Office\;\Outlook\Profiles\;\9375CFF0413111d3B88A00104B2A6676\;\Display Name</TargetObject>
         <TargetObject condition="contains all">SOFTWARE\Microsoft\Office\;\Outlook\Profiles\;\9375CFF0413111d3B88A00104B2A6676\;\Email</TargetObject>
@@ -1892,6 +1894,7 @@
           <TargetObject condition="begin with">HKLM\System\CurrentControlSet\Services\HealthService\Parameters\Management Groups</TargetObject>
         </Rule>
         <TargetObject condition="contains">\{CAFEEFAC-</TargetObject>
+        <TargetObject condition="contains">Bluetooth</TargetObject>
         <EventType condition="is">CreateKey</EventType>
         <TargetObject condition="begin with">HKLM\COMPONENTS</TargetObject>
         <Image condition="is">C:\Program Files\ownCloud\owncloud.exe</Image>
@@ -1949,6 +1952,8 @@
         <TargetObject condition="contains all">SOFTWARE;\Microsoft\EnterpriseCertificates\Disallowed</TargetObject>
         <TargetObject condition="contains all">SOFTWARE;\Microsoft\SystemCertificates\Disallowed</TargetObject>
         <TargetObject condition="contains">Software\Microsoft\Windows\CurrentVersion\WinTrust\Trust Providers\Software Publishing</TargetObject>
+        <TargetObject condition="contains">SONIX\PCCAM</TargetObject>
+        <TargetObject condition="contains">IBMPMSVC</TargetObject>
         <TargetObject condition="is">HKLM\SOFTWARE\Policies\Microsoft\SystemCertificates\Root\Certificates</TargetObject>
         <Image condition="is">C:\Windows\SystemApps\Microsoft.Windows.Cortana_cw5n1h2txyewy\SearchUI.exe</Image>
         <Image condition="begin with">C:\$WINDOWS.~BT\</Image>
@@ -2146,6 +2151,7 @@
         <Image condition="end with">Program Files\Trend\SPROTECT\x64\tsc64.exe</Image>
         <Image condition="end with">Program Files (x86)\Trend Micro\OfficeScan\PCCSRV\web\service\osceintegrationservice.exe</Image>
         <Image condition="end with">Program Files (x86)\Trend Micro\OfficeScan\PCCSRV\web\service\OfcLogReceiverSvc.exe</Image>
+        <Image condition="end with">NinjaRMMAgent.exe</Image>
         <PipeName condition="is">\Trend Micro OSCE Command Handler Manager</PipeName>
         <PipeName condition="is">\Trend Micro OSCE Command Handler2 Manager</PipeName>
         <PipeName condition="is">\Trend Micro Endpoint Encryption ToolBox Command Handler Manager</PipeName>
@@ -2984,3 +2990,15 @@
     </RuleGroup>
   </EventFiltering>
 </Sysmon>
+
+
+<!--
+  Removed from Event ID 7 Include list.
+        <ImageLoaded name="technique_id=T1059.001,technique_name=PowerShell" condition="end with">system.management.automation.ni.dll</ImageLoaded>
+        <ImageLoaded name="technique_id=T1059.001,technique_name=PowerShell" condition="end with">system.management.automation.dll</ImageLoaded>
+        <ImageLoaded name="technique_id=T1059.001,technique_name=PowerShell" condition="end with">Microsoft.PowerShell.Commands.Diagnostics.dll</ImageLoaded>
+        <ImageLoaded name="technique_id=T1059.001,technique_name=PowerShell" condition="end with">Microsoft.PowerShell.Commands.Management.dll</ImageLoaded>
+        <ImageLoaded name="technique_id=T1059.001,technique_name=PowerShell" condition="end with">Microsoft.PowerShell.Commands.Utility.dll</ImageLoaded>
+        <ImageLoaded name="technique_id=T1059.001,technique_name=PowerShell" condition="end with">Microsoft.PowerShell.ConsoleHost.dll</ImageLoaded>
+        <ImageLoaded name="technique_id=T1059.001,technique_name=PowerShell" condition="end with">Microsoft.PowerShell.Security.dll</ImageLoaded>
+-->
